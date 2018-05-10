@@ -1,36 +1,42 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import './App.css';
 import {bicing} from './assets/bicing';
 import {BicingStation} from './components/BicingStation';
+import AppBar from 'material-ui/AppBar';
+import Typography from 'material-ui/Typography';
+import {withStyles} from 'material-ui/styles';
+import Toolbar from 'material-ui/Toolbar';
+
+const styles = {
+    root: {
+        flexGrow: 1,
+    },
+};
 
 class App extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.bicingjson = bicing;
         // debugger;
 
-
     }
 
-  render() {
-      return (
-          <div className="App">
-              <header className="App-header">
-                  <img src={logo} className="App-logo" alt="logo" />
-                  <h1 className="App-title">Servicio Bicing</h1>
-              </header>
-              <p className="App-intro">
-                  To get started, edit <code>src/App.js</code> and save to reload.
-              </p>
-              <ul>
-                  { this.bicingjson.stations.map(s=><BicingStation id={s.id} streetName={s.streetName}/>)}
-              </ul>
-          </div>
-      );
-      console.log(bicing);
-  }
+    render() {
+        return (
+            <div className="App">
+                <AppBar position="static" color="default">
+                    <Toolbar>
+                        <Typography variant="title" color="inherit">
+                            Servicio Bicing
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                {this.bicingjson.stations.map(s => <BicingStation bicing={s}/>)}
+            </div>
+        );
+    }
 }
 
-export default App;
+export default withStyles(styles)(App);
+
